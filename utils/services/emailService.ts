@@ -19,7 +19,7 @@ export const sendEmail = async (options: EmailOptions): Promise<boolean> => {
   try {
     // Convert options to SendGrid format
     const msg = {
-      from: process.env.EMAIL_FROM || 'j.grant@neurochangeinstitute.org',
+      from: process.env.EMAIL_FROM || 'noreply@dreamscapeai.com',
       to: options.to,
       subject: options.subject,
       text: options.text,
@@ -70,12 +70,12 @@ export const sendClientAndPractitionerReports = async (
       `,
       attachments: [
         {
-          filename: `Neuro_Change_Method™_Practitioner_Report.pdf`,
+          filename: `Neuro_Change_Method\u2122_Practitioner_Report.pdf`,
           content: practitionerPdfBuffer,
           contentType: 'application/pdf',
         },
         {
-          filename: `Neuro_Change_Method™_Client_Assessment_Report.pdf`,
+          filename: `Neuro_Change_Method\u2122_Client_Assessment_Report.pdf`,
           content: clientPdfBuffer,
           contentType: 'application/pdf',
         }
@@ -106,7 +106,7 @@ export const sendClientAndPractitionerReports = async (
       `,
       attachments: [
         {
-          filename: `Neuro_Change_Method™_Client_Assessment_Report.pdf`,
+          filename: `Neuro_Change_Method\u2122_Client_Assessment_Report.pdf`,
           content: clientPdfBuffer,
           contentType: 'application/pdf',
         }
@@ -133,12 +133,12 @@ export const sendClientAndPractitionerReports = async (
     `,
     attachments: [
       {
-        filename: `Neuro_Change_Method™_Practitioner_Report.pdf`,
+        filename: `Neuro_Change_Method\u2122_Practitioner_Report.pdf`,
         content: practitionerPdfBuffer,
         contentType: 'application/pdf',
       },
       {
-        filename: `Neuro_Change_Method™_Client_Assessment_Report.pdf`,
+        filename: `Neuro_Change_Method\u2122_Client_Assessment_Report.pdf`,
         content: clientPdfBuffer,
         contentType: 'application/pdf',
       }
