@@ -65,17 +65,17 @@ export const sendClientAndPractitionerReports = async (
         <div style="font-family: Arial, sans-serif; max-width: 600px; margin: 0; text-align: left;">
           <p>Dear Practitioner,</p>
           <p>Attached are the assessment reports for ${clientName}, submitted under you.</p>
-          <p>Please send a message to <a href="mailto:charlyn@neurochangeinsitute.org" style="color: blue;">charlyn@neurochangeinsitute.org</a> if you need any further information.</p>
+          <p>Please send a message to <a href="mailto:charlyn@neurochangeinstitute.org" style="color: blue;">charlyn@neurochangeinstitute.org</a> if you need any further information.</p>
         </div>
       `,
       attachments: [
         {
-          filename: `Neuro_Change_Method\u2122_Practitioner_Report.pdf`,
+          filename: `Neuro_Change_Method_TM_Practitioner_Report.pdf`,
           content: practitionerPdfBuffer,
           contentType: 'application/pdf',
         },
         {
-          filename: `Neuro_Change_Method\u2122_Client_Assessment_Report.pdf`,
+          filename: `Neuro_Change_Method_TM_Client_Assessment_Report.pdf`,
           content: clientPdfBuffer,
           contentType: 'application/pdf',
         }
@@ -106,7 +106,7 @@ export const sendClientAndPractitionerReports = async (
       `,
       attachments: [
         {
-          filename: `Neuro_Change_Method\u2122_Client_Assessment_Report.pdf`,
+          filename: `Neuro_Change_Method_TM_Client_Assessment_Report.pdf`,
           content: clientPdfBuffer,
           contentType: 'application/pdf',
         }
@@ -128,17 +128,17 @@ export const sendClientAndPractitionerReports = async (
       <div style="font-family: Arial, sans-serif; max-width: 600px; margin: 0; text-align: left;">
         <p>Dear Admin,</p>
         <p>Attached are the assessment reports for ${clientName}, submitted under ${practitionerEmail}.</p>
-        <p>Please send a message to <a href="mailto:charlyn@neurochangeinsitute.org" style="color: blue;">charlyn@neurochangeinsitute.org</a> if you need any further information.</p>
+        <p>Please send a message to <a href="mailto:charlyn@neurochangeinstitute.org" style="color: blue;">charlyn@neurochangeinstitute.org</a> if you need any further information.</p>
       </div>
     `,
     attachments: [
       {
-        filename: `Neuro_Change_Method\u2122_Practitioner_Report.pdf`,
+        filename: `Neuro_Change_Method_TM_Practitioner_Report.pdf`,
         content: practitionerPdfBuffer,
         contentType: 'application/pdf',
       },
       {
-        filename: `Neuro_Change_Method\u2122_Client_Assessment_Report.pdf`,
+        filename: `Neuro_Change_Method_TM_Client_Assessment_Report.pdf`,
         content: clientPdfBuffer,
         contentType: 'application/pdf',
       }
@@ -180,7 +180,7 @@ export const sendPractitionerReport = async (
       `,
       attachments: [
         {
-          filename: `Practitioner_Report_${clientName}.pdf`,
+          filename: `Neuro_Change_Method_TM_Practitioner_Report.pdf`,
           content: pdfBuffer,
           contentType: 'application/pdf',
         },
