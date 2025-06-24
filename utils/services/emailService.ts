@@ -50,7 +50,8 @@ export const sendClientAndPractitionerReports = async (
   clientName: string,
   practitionerPdfBuffer: Buffer,
   clientPdfBuffer: Buffer,
-  userEmail?: string
+  userEmail?: string,
+  practitionerName?: string
 ): Promise<{success: boolean, userEmailSent: boolean}> => {
   let success = true;
   let userEmailSent = true;
@@ -64,8 +65,8 @@ export const sendClientAndPractitionerReports = async (
       html: `
         <div style="font-family: Arial, sans-serif; max-width: 600px; margin: 0; text-align: left;">
           <p>Dear Practitioner,</p>
-          <p>Attached are the assessment reports for ${clientName}, submitted under you.</p>
-          <p>Please send a message to <a href="mailto:charlyn@neurochangeinstitute.org" style="color: blue;">charlyn@neurochangeinstitute.org</a> if you need any further information.</p>
+          <p>Attached are the assessment reports for ${clientName} ${userEmail ? ` (${userEmail})` : ''}, submitted under you.</p>
+          <p>Please send a message to <a href="mailto:charlyn@neurochangeinsitute.org" style="color: blue;">charlyn@neurochangeinsitute.org</a> if you need any further information.</p>
         </div>
       `,
       attachments: [
@@ -122,13 +123,13 @@ export const sendClientAndPractitionerReports = async (
   // Always send a copy to the default admin email
   const adminOptions: EmailOptions = {
     to: DEFAULT_ADMIN_EMAIL,
-    subject: `Subject: DSAI Assessment Reports for ${clientName} - ${practitionerEmail}`,
-    text: `Dear Admin,\n\nAttached are the assessment reports for ${clientName}, submitted under ${practitionerEmail}.`,
+    subject: `Subject: DSAI Assessment Reports for ${clientName} ${userEmail ? ` (${userEmail})` : ''} - ${practitionerEmail}`,
+    text: `Dear Admin,\n\nAttached are the assessment reports for ${clientName} ${userEmail ? ` (${userEmail})` : ''}, submitted under ${practitionerName }.`,
     html: `
       <div style="font-family: Arial, sans-serif; max-width: 600px; margin: 0; text-align: left;">
         <p>Dear Admin,</p>
-        <p>Attached are the assessment reports for ${clientName}, submitted under ${practitionerEmail}.</p>
-        <p>Please send a message to <a href="mailto:charlyn@neurochangeinstitute.org" style="color: blue;">charlyn@neurochangeinstitute.org</a> if you need any further information.</p>
+        <p>Attached are the assessment reports for ${clientName} ${userEmail ? ` (${userEmail})` : ''}, submitted under ${practitionerName} (${practitionerEmail}).</p>
+        <p>Please send a message to <a href="mailto:charlyn@neurochangeinsitute.org" style="color: blue;">charlyn@neurochangeinsitute.org</a> if you need any further information.</p>
       </div>
     `,
     attachments: [
@@ -158,7 +159,9 @@ export const sendClientAndPractitionerReports = async (
 export const sendPractitionerReport = async (
   practitionerEmail: string,
   clientName: string,
-  pdfBuffer: Buffer
+  pdfBuffer: Buffer,
+  userEmail?: string,
+  practitionerName?: string
 ): Promise<boolean> => {
   let success = true;
 
@@ -167,12 +170,12 @@ export const sendPractitionerReport = async (
     const options: EmailOptions = {
       to: practitionerEmail,
       subject: `Neuro Change Method™ - Practitioner Report for ${clientName}`,
-      text: `Dear Practitioner,\n\nAttached is the practitioner report for ${clientName} generated using the Neuro Change Method™.\n\nBest regards,\nDreamScape AI Team`,
+      text: `Dear Practitioner,\n\nAttached is the practitioner report for ${clientName}${userEmail ? ` (${userEmail})` : ''} generated using the Neuro Change Method™.\n\nBest regards,\nDreamScape AI Team`,
       html: `
         <div style="font-family: Arial, sans-serif; max-width: 600px; margin: 0 auto;">
           <h2 style="color: #6633CC;">Neuro Change Method™ - Practitioner Report</h2>
           <p>Dear Practitioner,</p>
-          <p>Attached is the practitioner report for <strong>${clientName}</strong> generated using the Neuro Change Method™.</p>
+          <p>Attached is the practitioner report for <strong>${clientName}${userEmail ? ` (${userEmail})` : ''}</strong> generated using the Neuro Change Method™.</p>
           <p>This report contains a comprehensive analysis of the client's responses and recommendations for their transformation journey.</p>
           <p style="margin-top: 20px;">Best regards,</p>
           <p><strong>DreamScape AI Team</strong></p>
@@ -197,14 +200,14 @@ export const sendPractitionerReport = async (
   // Always send a copy to the default admin email
   const adminOptions: EmailOptions = {
     to: DEFAULT_ADMIN_EMAIL,
-    subject: `[COPY] Neuro Change Method™ - Practitioner Report for ${clientName}`,
-    text: `Admin Copy - Practitioner Report\n\nAttached is the practitioner report for ${clientName} generated using the Neuro Change Method™.\n\nSelected practitioner: ${practitionerEmail || 'None'}\n\nBest regards,\nDreamScape AI Team`,
+    subject: `[COPY] Neuro Change Method™ - Practitioner Report for ${clientName}${userEmail ? ` (${userEmail})` : ''}`,
+    text: `Admin Copy - Practitioner Report\n\nAttached is the practitioner report for ${clientName}${userEmail ? ` (${userEmail})` : ''} generated using the Neuro Change Method™.\n\nSelected practitioner: ${practitionerName ? `${practitionerName} (${practitionerEmail})` : practitionerEmail || 'None'}\n\nBest regards,\nDreamScape AI Team`,
     html: `
       <div style="font-family: Arial, sans-serif; max-width: 600px; margin: 0 auto;">
         <h2 style="color: #6633CC;">[ADMIN COPY] Neuro Change Method™ - Practitioner Report</h2>
         <p>This is an admin copy of the practitioner report.</p>
-        <p>Attached is the practitioner report for <strong>${clientName}</strong> generated using the Neuro Change Method™.</p>
-        <p><strong>Selected practitioner:</strong> ${practitionerEmail || 'None'}</p>
+        <p>Attached is the practitioner report for <strong>${clientName}${userEmail ? ` (${userEmail})` : ''}</strong> generated using the Neuro Change Method™.</p>
+        <p><strong>Selected practitioner:</strong> ${practitionerName ? `${practitionerName} (${practitionerEmail})` : practitionerEmail || 'None'}</p>
         <p style="margin-top: 20px;">Best regards,</p>
         <p><strong>DreamScape AI Team</strong></p>
       </div>
